@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Main page</title>
+	<link rel="stylesheet" href="css/main.css">
+	<script src="js/libs.min.js"></script>
+	<script src="js/main.js"></script>
+</head>
+<body ng-app="AngApp">
+	<div class="container" ng-controller="defaultCtrl as default">
+		<div class="block">
+			<h2 class="block__title">Items</h2>
+			<form action="#" class="add-item">
+				<input type="text" class="inp-name" ng-model="item.name">
+				<button class="button" type="submit" ng-click="AddItem()">Add new</button>
+			</form>
+			<div class="items"></div>
+			<div ng-repeat="item in items track by item.number">
+				<input type="radio" ng-model="$parent.active" value="{{item.number+1}}" class="hidden">
+				<strong>{{item.name}}</strong>
+				<span>{{item.comments.length}}</span>
+				<button class="button button-red button-delete">Delete</button>
+			</div>
+		</div>
+		<div class="block">
+			<h2 class="block__title">Comments #{{active}}</h2>
+			<div class="comments"></div>
+		</div>
+	</div>	
+</body>
+</html>
