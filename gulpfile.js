@@ -3,8 +3,7 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     rigger = require("gulp-rigger"),
     prefixer = require('gulp-autoprefixer'),
-    concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
+    del = require('del'),
     imagemin = require('gulp-imagemin');
 
 var path = {
@@ -13,39 +12,42 @@ var path = {
         js: 'build/js/',
         css: 'build/css/',
         img: 'build/img/',
-        fonts: 'build/fonts/'
+        fonts: 'build/fonts/',
+        data: 'build/data/'
     },
     src:{
         html:'src/*.html',
         js: 'src/js/main.js',
-        style: 'src/style/main.scss',
+        style: 'src/style/main.*',
         img: 'src/img/**/*.*',
+        data: 'src/data/**/*.*',
         fonts: 'src/fonts/**/*.*'
     },
     libs:{        
-        js: 'src/js/libs/**/*.js',
-        css: 'src/style/libs/libs.scss'
+        js: 'src/js/libs/libs.js',
+        css: 'src/style/libs/libs.*'
     },
     watch: {
         html: 'src/**/*.html',
         js: 'src/js/**/*.js',
         style: 'src/style/**/*.*',
         img: 'src/img/**/*.*',
-        fonts: 'src/fonts/**/*.*'
+        fonts: 'src/fonts/**/*.*',
+        data: 'src/data/**/*.*'
     },
-    clean: 'build'
+    clean: './build'
 };
 
 gulp.task('js-lib', function() {
-        return gulp.src(path.libs.js)
-            .pipe(concat('libs.min.js'))
-            .pipe(uglify())
-            .pipe(gulp.dest(path.build.js));
+    gulp.src(path.libs.js)
+    .pipe(rigger())
+    .pipe(gulp.dest(path.build.js));
 });
 
 gulp.task('js', function() {
-        return gulp.src(path.src.js)
-            .pipe(gulp.dest(path.build.js));
+    gulp.src(path.src.js)
+    .pipe(rigger())
+    .pipe(gulp.dest(path.build.js));
 });
 
 gulp.task('sass',function(){
@@ -73,13 +75,27 @@ gulp.task('img', function () {
         .pipe(gulp.dest(path.build.img))
 });
 
+gulp.task('data',function(){
+    gulp.src(path.src.data)
+        .pipe(gulp.dest(path.build.data))
+});
+
 gulp.task('watch',function(){
     gulp.watch(path.watch.style,['sass']);
     gulp.watch(path.watch.js,['js']);
     gulp.watch(path.watch.html,['html']);
     gulp.watch(path.watch.img,['img']);
+    gulp.watch(path.libs.js,['js-lib']);
+    gulp.watch(path.libs.css,['css-lib']);
+    gulp.watch(path.watch.data,['data']);
 });
 
-gulp.task('build', ['img', 'sass', 'js', 'html', 'js-lib','css-lib']);
 
-gulp.task('default',['build','watch']);
+
+gulp.task('clean', function () {
+  return del([path.clean]);
+});
+
+gulp.task('build', ['img', 'sass', 'js', 'html', 'js-lib','css-lib','data']);
+
+gulp.task('default',['clean','build','watch']);

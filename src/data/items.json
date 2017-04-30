@@ -1,7 +1,7 @@
 [
 	{
 		"name": "First item with custom name",
-		"number": 1,
+		"number": 0,
 		"comments": [
 			"comment for item # 1 : some intresting text 1",
 			"comment for item # 1 : some intresting text 2",
@@ -17,7 +17,7 @@
 	},
 	{
 		"name": "Second item is active",
-		"number": 2,
+		"number": 1,
 		"comments": [
 			"comment for item # 2 : some intresting text 1",
 			"comment for item # 2 : some intresting text 2",

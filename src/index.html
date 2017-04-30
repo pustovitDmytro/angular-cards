@@ -17,23 +17,23 @@
 			</form>
 			<div class="items">
 			<div ng-repeat="item in items track by item.number">
-				<input type="radio" ng-model="$parent.active" value="{{item.number}}" id="radio_{{item.number}}">
+				<input type="radio" ng-model="$parent.active" value="{{item.number+1}}" id="radio_{{item.number}}">
 				<label for="radio_{{item.number}}">
 				<strong>{{item.name}}</strong>
 				<span>{{item.comments.length}}</span>
-				<button class="button button-red button-delete">Delete</button>
+				<button class="button button-red button-delete" ng-click="DeleteItem(item)">Delete</button>
 				</label>
 			</div>
 			</div>
 		</div>
-		<div class="block" ng-if="active+1">
+		<div class="block" ng-if="(active+1)">
 			<h2 class="block__title">Comments #{{active}}</h2>
 			<div class="comments" ng-repeat="comment in comments">
 				<strong>{{comment}}</strong>
 			</div>
 			<div class="comments">
 				<form class="add-comment">
-					<textarea type="text" class="input-comment" ng-enter="AddCommment()" ng-model="comment"></textarea>
+					<textarea type="text" class="input-comment" on-keyup="AddCommment()" keys="13" ng-model="$parent.comment"></textarea>
 				</form>
 			</div>
 		</div>
