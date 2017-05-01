@@ -1,18 +1,3 @@
-AngApp = angular.module("AngApp",[])
-AngApp.directive('onKeyup', function() {
-    return function(scope, elm, attrs) {
-        function applyKeyup() {
-          scope.$apply(attrs.onKeyup);
-        };           
-        var allowedKeys = scope.$eval(attrs.keys);
-        console.log(allowedKeys);
-        elm.bind('keyup', function(evt){
-            if (allowedKeys == evt.which) {
-               	applyKeyup();
-            }
-        });
-    };
-});
 AngApp.controller("defaultCtrl", function($scope,$window,$http) {
 	$scope.sendRequest = function () {
 		$http.get("../data/items.json").success(function(response) {
@@ -20,18 +5,6 @@ AngApp.controller("defaultCtrl", function($scope,$window,$http) {
 			$window.localStorage.setItem(storageName, JSON.stringify($scope.items));
 		})
 	}
-	var storageName = "empeek-items";
-	$scope.items = JSON.parse($window.localStorage.getItem(storageName));
-	//if(!$scope.items){
-		$scope.items = $scope.sendRequest();
-	//}
-	$scope.comments = [];
-	$scope.active = -1;
-	$scope.$watch('active', function (newVal) {
-		if($scope.active>0){
-			$scope.comments = $scope.items[newVal-1].comments;
-		}
-	});
 	$scope.AddItem = function(){
 		$scope.items.push({
 			name: $scope.item.name,
@@ -61,4 +34,16 @@ AngApp.controller("defaultCtrl", function($scope,$window,$http) {
 		$window.localStorage.setItem(storageName, JSON.stringify($scope.items));
 		$scope.comment = "";		
 	}
+	var storageName = "empeek-items";
+	$scope.items = JSON.parse($window.localStorage.getItem(storageName));
+	if(!$scope.items){
+		$scope.items = $scope.sendRequest();
+	}
+	$scope.comments = [];
+	$scope.active = -1;
+	$scope.$watch('active', function (newVal) {
+		if($scope.active>0){
+			$scope.comments = $scope.items[newVal-1].comments;
+		}
+	});	
 });

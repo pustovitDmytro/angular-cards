@@ -1,0 +1,127 @@
+.container{
+	margin: 0 auto;
+	padding:20px;
+	display:flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: flex-start;
+	@media #{$phone}{
+		flex-direction: column;
+		align-items: center;
+	}
+	@media #{$pc}{
+		flex-direction: row;
+	}
+}
+.block{
+	background-color:$whiteBG;
+	padding: 20px;
+	min-height: 300px;
+	@media #{$pc}{
+		width: 45%;
+	}
+	@media #{$phone}{
+		width: 90%;
+	}
+	&__title{
+		font-size: 30px;
+	}
+	.add-item{
+		margin-top: 10px;
+		display: flex;
+		justify-content: space-between;
+		.input-name{
+			border: $greyBorder;
+			height: $inputHeight;
+			padding-left: 20px;
+			width:70%;
+		}
+		.button{
+			width: 28%
+		}
+	}
+	.items{
+		padding-top: 15px;
+		.item{
+			display: flex;
+			height: $itemHeight;
+			justify-content: space-between;
+			align-items: center;
+			border-bottom: $greyBorder;
+			.item-info{
+				display:flex;
+				align-items: center;
+			}
+			.number-green{
+				@extend .button-green;
+				border-radius: 50%;
+				margin-left: 5px;
+				padding: 0 5px;
+			}
+		}
+		.radio-element:checked + .item{
+			background-color: darken($whiteBG, 5%);
+			.item-name{
+				margin-left:18px;
+			}
+			.item-info:before{
+				content:".";
+				background-color: $darkRed;
+				height: $itemHeight;
+				width: 5px;
+				display: inline-block;
+				margin-left: -23px;
+			}
+		}
+	}
+	.picture{
+		margin-right:10px;
+		height: $itemHeight;
+		min-width: $itemHeight;
+	}
+	.comment{
+		min-height: $itemHeight;
+		margin-top: 5px;
+		padding-bottom: 5px;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		border-bottom: $greyBorder;
+		.picture{
+			margin-top:5px;
+		}	
+		&__text{
+			display: flex;
+			flex-grow: 1;
+		}
+		&__last{
+			border: none;
+		}
+	}
+	.pic-blue{
+		.picture{
+			background-color: $picBlue;
+		}
+	}
+	.pic-orange{
+		.picture{
+			background-color: $picOrange;
+		}
+	}
+	.add-comment{
+		margin-top: 20px;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		.picture{
+			background-color: $darkGrey; 
+		}
+		.input-comment{
+			display: flex;
+			flex-grow: 1;
+			border: $greyBorder;
+			resize: none;
+		}
+	}
+}

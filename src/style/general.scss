@@ -1,0 +1,40 @@
+//-----------------------------
+//------General--------------
+//-----------------------------
+
+//css-reset
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+label{
+	cursor: pointer;
+}
+a{
+	text-decoration: none;
+	cursor: pointer;
+}
+
+//my custom general styles
+body{
+	font: 15px/1.15 arial, sans-serif;
+	background-color: $greyBG;
+}
+.button{
+	border: 1px solid;
+	border-radius: 5px;
+	height: $inputHeight;
+	min-width: 100px;
+	&-green{
+		background-color: $lightGreen;
+		color: white;
+	}&-red{
+		border-color: $darkRed;
+		color: $darkRed;
+	}
+}
+.hidden{
+	display: none;
+}

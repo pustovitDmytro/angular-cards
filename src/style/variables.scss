@@ -1,0 +1,23 @@
+//-----------------------------
+//------Variables--------------
+//-----------------------------
+
+//color-variables
+$darkRed: darken(red, 20%);
+$darkGrey: #bfbfbf;
+$whiteBG: white;
+$greyBG: #e6e6e6;
+$lightGreen: #009933;
+$picOrange: #ff9900;
+$picBlue: #0033cc;
+
+//heights
+$inputHeight: 30px;
+$itemHeight: 40px;
+
+//adaptive
+$phone: "screen and (min-device-width: 360px) and (max-device-width: 889px)";
+$pc: "screen and (min-device-width: 890px)";
+
+//custom:
+$greyBorder: 1px solid $greyBG;
