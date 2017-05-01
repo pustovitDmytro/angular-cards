@@ -30,10 +30,10 @@
 		</div>
 		<div class="block" ng-if="(active+1)">
 			<h2 class="block__title">Comments #{{active}}</h2>
-			<div ng-repeat="comment in comments" ng-class="$odd ? 'pic-blue' : 'pic-orange'" >
+			<div ng-repeat="comment in comments track by comment.id" ng-class="$odd ? 'pic-blue' : 'pic-orange'" >
 				<div class="comment"  ng-class="$last?'comment__last':''">
 				<div class="picture"></div>
-				<p class="comment__text">{{comment}}</p>
+				<p class="comment__text">{{comment.text}}</p>
 				</div>
 			</div>
 				<form class="add-comment">
