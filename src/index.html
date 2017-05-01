@@ -12,30 +12,32 @@
 		<div class="block">
 			<h2 class="block__title">Items</h2>
 			<form name="itemForm" class="add-item" novalidate ng-submit="AddItem(itemForm.$valid)">
-				<input type="text" class="inp-name" required ng-model="item.name">
-				<button class="button" type="submit">Add new</button>
+				<input type="text" class="input-name" placeholder="Type name here.." required ng-model="item.name">
+				<button class="button button-green" type="submit">Add new</button>
 			</form>
 			<div class="items">
 			<div ng-repeat="item in items track by item.number">
-				<input type="radio" ng-model="$parent.active" value="{{item.number+1}}" id="radio_{{item.number}}">
-				<label for="radio_{{item.number}}">
-				<strong>{{item.name}}</strong>
-				<span>{{item.comments.length}}</span>
-				<button class="button button-red button-delete" ng-click="DeleteItem(item)">Delete</button>
+				<input type="radio" class="hidden radio-element" ng-model="$parent.active" value="{{item.number+1}}" id="radio_{{item.number}}">
+				<label class="item" for="radio_{{item.number}}">
+				<div class="item-info">
+				<strong class="item-name">{{item.name}}</strong>
+				<span class="number-green">{{item.comments.length}}</span>
+				</div>
+				<button class="button button-red" ng-click="DeleteItem(item)">Delete</button>
 				</label>
 			</div>
 			</div>
 		</div>
 		<div class="block" ng-if="(active+1)">
 			<h2 class="block__title">Comments #{{active}}</h2>
-			<div class="comments" ng-repeat="comment in comments">
-				<strong>{{comment}}</strong>
+			<div class="comment" ng-repeat="comment in comments" ng-class="$odd ? 'pic-blue' : 'pic-orange'">
+				<div class="picture"></div>
+				<p class="comment__text">{{comment}}</p>
 			</div>
-			<div class="comments">
 				<form class="add-comment">
+					<div class="picture"></div>
 					<textarea type="text" class="input-comment" on-keyup="AddCommment()" keys="13" ng-model="$parent.comment"></textarea>
 				</form>
-			</div>
 		</div>
 	</div>	
 </body>

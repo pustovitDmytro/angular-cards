@@ -17,10 +17,11 @@ AngApp.controller("defaultCtrl", function($scope,$window,$http) {
 	$scope.sendRequest = function () {
 		$http.get("../data/items.json").success(function(response) {
 			$scope.items = response;
-			$window.localStorage.setItem('items', JSON.stringify($scope.items));
+			$window.localStorage.setItem(storageName, JSON.stringify($scope.items));
 		})
 	}
-	$scope.items = JSON.parse($window.localStorage.getItem('items'));
+	var storageName = "empeek-items";
+	$scope.items = JSON.parse($window.localStorage.getItem(storageName));
 	//if(!$scope.items){
 		$scope.items = $scope.sendRequest();
 	//}
@@ -39,7 +40,7 @@ AngApp.controller("defaultCtrl", function($scope,$window,$http) {
 			id: Date.now()
 		});
 		$scope.item.name = "";
-		$window.localStorage.setItem('items', JSON.stringify($scope.items));	
+		$window.localStorage.setItem(storageName, JSON.stringify($scope.items));	
 	}
 	$scope.DeleteItem = function(item){
 		number=item.number;
@@ -53,11 +54,11 @@ AngApp.controller("defaultCtrl", function($scope,$window,$http) {
 		if($scope.active==number+1){
 			$scope.active=-1;
 		}
-		$window.localStorage.setItem('items', JSON.stringify($scope.items));
+		$window.localStorage.setItem(storageName, JSON.stringify($scope.items));
 	}
 	$scope.AddCommment = function(){
 		$scope.items[$scope.active-1].comments.push($scope.comment);
-		$window.localStorage.setItem('items', JSON.stringify($scope.items));
+		$window.localStorage.setItem(storageName, JSON.stringify($scope.items));
 		$scope.comment = "";		
 	}
 });
